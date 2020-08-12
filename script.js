@@ -6,7 +6,7 @@
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 // WHEN all questions are answered or the timer reaches 0
-/
+// THEN the game is over
 // WHEN the game is over
 // THEN I can save my initials and score
 // when the timer ends, the game ends and the results are displayed
@@ -16,7 +16,7 @@ var header = document.querySelector(".header");
 var score = document.getElementById("score");
 var submitButton = document.getElementById("submitButton");
 
-var quizQuestionHeader = document.getElementById("quizQuestionHeader");
+var codeQuestions = document.getElementById("codeQuestions");
 var choice1 = document.getElementById("one");
 var choice2 = document.getElementById("two");
 var choice3 = document.getElementById("three");
@@ -44,35 +44,35 @@ var timer = document.getElementById("timer"); // Timer Variable
 // QUIZ QUESTION ARRAY
 var quizQuestions = [
   {
-  "quizQuestionHeader" : "Javascript starts counting on...", 
+  "codeQuestions" : "Javascript starts counting on...", 
   "one" : "1. 0",
   "two" : "2. 1",
   "three" : "3. 0 or 1",
   "four" : "4. Javascript does not cpount",
   "correct" : "1. 0",
   },{
-  "quizQuestionHeader" : "What is a varible?",
+  "codeQuestions" : "What is a varible?",
   "one" : "1. The answer",
   "two" : "2. The end of a for statemment",
   "three" : "3. A container for a piece of data",
   "four" : "4. curly brackets",
   "correct" : "3. A container for a piece of data",
   },{
-  "quizQuestionHeader" : "How do you declare varibles?",
+  "codeQuestions" : "How do you declare varibles?",
   "one" : "1. var = element",
   "two" : "2. I declare a var",
   "three" : "3. var is ==",
   "four" : "4. var (keyword) =",
   "correct" : "4. var (keyword) =",
   },{
-   "quizQuestionHeader" : "What will an undeclared varible return?",
+   "codeQuestions" : "What will an undeclared varible return?",
    "one" : "1. Undefined",
    "two" : "2. a for loop",
    "three" : "3. a fatal error",
    "four" : "4. an infinite loop",
    "correct" : "1. Undefined",
   },{
-   "quizQuestionHeader" : "What kind of value does a Boolean take?",
+   "codeQuestions" : "What kind of value does a Boolean take?",
    "one" : "1. True or False",
    "two" : "2. a number",
    "three" : "3. a string",
@@ -84,22 +84,9 @@ var quizQuestions = [
 var startScore = 0; 
 var questionIndex = 0;
 
-// FIRST PAGE 
-function codeQuizChallenge() {
-  quizChallengePage.style.display = "block"; // Shows Rules 
-  header.style.display = "block"; // Shows Header
-  quizQuestionsPage.style.display = "none"; // Hide Quiz Questions Page
-  finalScorePage.style.display = "none";   // Hide Final Core Page 
 
-  var startScore = 0; // Starting time 
-  timer.textContent = "Time: " + startScore; // Holder text in nav bar 
-}
 
-// RESETTING GLOBAL VARIABLES WHEN RESTART QUIZ 
-function resetVariables() {
-  startScore = 0; 
-  questionIndex = 0;
-}
+
 
 // STARTS QUIZ 
 function startQuiz() { 
@@ -122,7 +109,7 @@ secondsLeft = 80; // seconds in Timer
 function showQuestions() {
   var q = quizQuestions[questionIndex];
 
-  quizQuestionHeader.innerHTML = q.quizQuestionHeader;
+  codeQuestions.innerHTML = q.codeQuestions;
   choice1.innerHTML = q.one;
   choice1.setAttribute("data-answer", q.one);
   choice2.innerHTML = q.two;
@@ -162,15 +149,13 @@ function checkAnswer(event) {
   answerResponse.textContent = "Correct!"; // If correct, say correct
   } else {
   answerResponse.textContent = "Wrong!"; // If wrong, say wrong & deduct 10 points
-      secondsLeft -= 10
-      if (secondsLeft < 0) {
-          secondsLeft = 0;
-      }
+      
+      
   }
-  if (quizQuestions.length === questionIndex+1) {
-    showFinalScore(); // If it has gone through all questions, show final score
-    return; // If not, print the next question
-  }
+//   if (quizQuestions.length === questionIndex+1) {
+//     showFinalScore(); // If it has gone through all questions, show final score
+//     return; // If not, print the next question
+//   }
   questionIndex++;
   showQuestions();
 }
@@ -249,5 +234,4 @@ goBack.addEventListener("click", function() { // Go back to the home page
   console.log("restart quiz")
 })
 
-// Page starts at home page 
-codeQuizChallenge(); 
+

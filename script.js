@@ -17,62 +17,54 @@ var score = document.getElementById("score");
 var submitButton = document.getElementById("submitButton");
 
 var codeQuestions = document.getElementById("codeQuestions");
-var choice1 = document.getElementById("one");
-var choice2 = document.getElementById("two");
-var choice3 = document.getElementById("three");
-var choice4 = document.getElementById("four");
-var correct = document.getElementById("correct");
+
+
 var answerResponse = document.getElementById("answerResponse");
 
 var finalScoreIs = document.getElementById("finalScoreIs");
 var quizQuestionsPage = document.getElementById("quizQuestionsPage");
-var questionButton = document.querySelector(".questionButton");
-
-var quizChallengePage = document.getElementById("quizChallengePage");
+var questionButton = document.getElementsByClassName("questionButton");
+var codeQuizPage = document.getElementById("codequizpage");
 var finalScorePage = document.getElementById("finalScorePage");
 var highScoreButtons = document.getElementById("highScoreButtons");
 
-var initialButton = document.getElementById("initialButton"); 
-var initials = document.getElementById("initials"); 
-var initialInput = document.getElementById("initialInput"); 
-
-var allDone = document.getElementById("allDone");
-var allDoneButtons = document.getElementById("form-inline");
+// var initialButton = document.getElementById("initialButton"); 
+// var initials = document.getElementById("initials"); 
+// var initialInput = document.getElementById("initialInput"); 
+// var allDone = document.getElementById("allDone");
+// var allDoneButtons = document.getElementById("form-inline");
 
 var timer = document.getElementById("timer"); // Timer Variable 
-
+//change remaining questions in array
 // QUIZ QUESTION ARRAY
 var quizQuestions = [
   {
-  "codeQuestions" : "Javascript starts counting on...", 
-  "one" : "1. 0",
-  "two" : "2. 1",
-  "three" : "3. 0 or 1",
-  "four" : "4. Javascript does not cpount",
+  "question" : "Javascript starts counting on...", 
+  "possibleAnswers" : ["1. 0","2. 1","3. 0 or 1","4. Javascript does not count",],
   "correct" : "1. 0",
   },{
-  "codeQuestions" : "What is a varible?",
+  "question" : "What is a varible?",
   "one" : "1. The answer",
   "two" : "2. The end of a for statemment",
   "three" : "3. A container for a piece of data",
   "four" : "4. curly brackets",
   "correct" : "3. A container for a piece of data",
   },{
-  "codeQuestions" : "How do you declare varibles?",
+  "question" : "How do you declare varibles?",
   "one" : "1. var = element",
   "two" : "2. I declare a var",
   "three" : "3. var is ==",
   "four" : "4. var (keyword) =",
   "correct" : "4. var (keyword) =",
   },{
-   "codeQuestions" : "What will an undeclared varible return?",
+   "question" : "What will an undeclared varible return?",
    "one" : "1. Undefined",
    "two" : "2. a for loop",
    "three" : "3. a fatal error",
    "four" : "4. an infinite loop",
    "correct" : "1. Undefined",
   },{
-   "codeQuestions" : "What kind of value does a Boolean take?",
+   "question" : "What kind of value does a Boolean take?",
    "one" : "1. True or False",
    "two" : "2. a number",
    "three" : "3. a string",
@@ -83,7 +75,7 @@ var quizQuestions = [
 
 var startScore = 0; 
 var questionIndex = 0;
-
+var secondsLeft = 60;
 
 
 
@@ -93,7 +85,7 @@ function startQuiz() {
 quizChallengePage.style.display = "none"; // Hide Rules 
 quizQuestionsPage.style.display = "block"; // Show Quiz Questions Page
 
-secondsLeft = 80; // seconds in Timer 
+ 
 
   var timerInterval = setInterval(function() { 
     secondsLeft--;
@@ -108,32 +100,21 @@ secondsLeft = 80; // seconds in Timer
 // SHOW QUESTIONS
 function showQuestions() {
   var q = quizQuestions[questionIndex];
-
-  codeQuestions.innerHTML = q.codeQuestions;
-  choice1.innerHTML = q.one;
-  choice1.setAttribute("data-answer", q.one);
-  choice2.innerHTML = q.two;
-  choice2.setAttribute("data-answer", q.two);
-  choice3.innerHTML = q.three;
-  choice3.setAttribute("data-answer", q.three);
-  choice4.innerHTML = q.four;
-  choice4.setAttribute("data-answer", q.four);
+codeQuestions.textContent = q.question
+for (var i=0; i< questionButton.length; i++){
+  questionButton[i].textContent = q.possibleAnswers[i]
+}
 }
 
 // EVENT LISTENERS WHEN USER CLICKS ANSWERS 
 showQuestions();
-choice1.addEventListener("click", function (event) {
-  checkAnswer(event);
-})
-choice2.addEventListener("click", function (event) {
-  checkAnswer(event);
-})
-choice3.addEventListener("click", function (event) {
-  checkAnswer(event);
-})
-choice4.addEventListener("click", function (event) {
-  checkAnswer(event);
-})
+console.log(questionButton)
+for (var i=0; i< questionButton.length; i++){
+  questionButton[i].addEventListener("click", function (event) {
+    checkAnswer(event);
+  })
+}
+
 
  // CHECK TO SEE IF ANSWER IS CORRECT
 function checkAnswer(event) {
@@ -209,29 +190,29 @@ submitButton.addEventListener("click", function() {
 })
 
 // CLICK TO VIEW HIGH SCORES - DOES NOT WORK 
-score.addEventListener("click", function() {
-  showHighScores();
-  console.log("view high scores")
-})
+// score.addEventListener("click", function() {
+//   showHighScores();
+//   console.log("view high scores")
+// })
 
 // CLICK INTIAL BUTTON TO SHOW HIGH SCORES - WORKS
-initialButton.addEventListener("click", function() { 
-  showHighScores();
-  console.log("initial button")
-}) 
+// initialButton.addEventListener("click", function() { 
+//   showHighScores();
+//   console.log("initial button")
+// }) 
 
-// CLEAR HIGH SCORES - WORKS
-clearHighScore.addEventListener("click", function() {
-  localStorage.clear();
-})
+// // CLEAR HIGH SCORES - WORKS
+// clearHighScore.addEventListener("click", function() {
+//   localStorage.clear();
+// })
 
-// GO BACK BUTTON EVENT liSTENER - WORKS 
-goBack.addEventListener("click", function() { // Go back to the home page
-  $("#highScoreList").empty() // clears out container
-  $("#initialInput").val("") // clears out the value in initial input 
-  resetVariables()
-  codeQuizChallenge();
-  console.log("restart quiz")
-})
+// // GO BACK BUTTON EVENT liSTENER - WORKS 
+// goBack.addEventListener("click", function() { // Go back to the home page
+//   $("#highScoreList").empty() // clears out container
+//   $("#initialInput").val("") // clears out the value in initial input 
+//   resetVariables()
+//   codeQuizChallenge();
+//   console.log("restart quiz")
+// })
 
 

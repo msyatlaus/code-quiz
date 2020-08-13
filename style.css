@@ -1,1 +1,28 @@
-/*  */
+/* .button {color:  rgb(205, 69, 233);} */
+#codeQuestions {color: darkviolet;
+}
+
+#button {
+    text-align: center;
+   }
+   
+   button {
+       text-align: center !important;
+       background-color: #ad7ce9 !important;
+       border-color: #8064A2 !important;
+       color: white !important;
+       font-size: 22px !important;
+       padding: 0px 12px 0px 12px !important;
+   }
+   
+   .btn:hover {
+       text-align: center !important;
+       background-color: #ee4ff3  !important;
+       border-color: #ba94e7 !important;
+       color: white !important;
+       font-size: 22px !important;
+       padding: 0px 12px 0px 12px !important;
+   }
+
+   .btn {color: darkviolet;}
+   
